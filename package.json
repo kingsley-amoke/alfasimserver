@@ -4,7 +4,8 @@
   "description": "alfasim backend",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node index.js"
   },
   "author": "smoqdev",
   "license": "ISC",
