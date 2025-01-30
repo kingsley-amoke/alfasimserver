@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const {creditUser} = require('./monnify');
 
 const app = express();
 
@@ -20,9 +21,10 @@ app.get('/', (req, res) => {
 res.send('Hello World')
 });
 
+
 app.post('/transfer', (req, res) => {
     res.send(200);
-    console.log(req.body);
+    creditUser(req.body);
 
     });
 
