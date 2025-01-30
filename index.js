@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 res.send('Hello World')
 });
 
-app.get('/transfer', (req, res) => {
+app.post('/transfer', (req, res) => {
     res.sendStatus(200);
     console.log('Transfer')
     });
