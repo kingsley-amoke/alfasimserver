@@ -13,8 +13,11 @@ res.send('Hello World')
 });
 
 app.get('/transfer', (req, res) => {
-    res.send('Transfer')
+    res.sendStatus(200);
     console.log('Transfer')
     });
 
-app.listen(PORT);
+app.listen(PORT, ()=>{
+    console.log(`App listening on port : ${PORT}`);
+}
+);
