@@ -21,9 +21,9 @@ res.send('Hello World')
 });
 
 app.post('/transfer', (req, res) => {
-    res.sendStatus(200);
+    res.send(200);
     console.log(req.body);
-    console.log('ji');
+
     });
 
 app.listen(PORT, ()=>{
