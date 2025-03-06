@@ -77,8 +77,11 @@ const buyAirtime = async (data) => {
 
   if (!userData)
     return { data: null, error: "", message: "No user found", status: 404 };
+  console.log(userData);
 
-  const { balance } = userData[0];
+  // const { balance } = userData[0];
+
+  const balance = "10";
 
   if (parseInt(balance) > price) {
     const body = {
