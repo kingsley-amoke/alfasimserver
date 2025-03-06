@@ -55,8 +55,30 @@ const recharge = async (email, amount) => {
   }
 };
 
+const deduct = async (email, amount) => {
+  try {
+    const userData = await fetchUser(email);
+
+    const { balance } = userData[0];
+
+    const newBalance = parseInt(balance) - parseInt(amount);
+
+    const { data, error } = await supabase
+      .from("users")
+      .update({ balance: newBalance })
+      .eq("email", email)
+      .select();
+
+    return { data, error };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
+  fetchUser,
   updateDeposits,
   fetchDeposit,
   recharge,
+  deduct,
 };
