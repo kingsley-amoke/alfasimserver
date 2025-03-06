@@ -26,7 +26,10 @@ app.post("/transfer", (req, res) => {
 });
 
 app.post("/data/buy", async (req, res) => {
-  buyData(req.body).then((data) => res.send(data));
+  buyData(req.body).then((data) => {
+    console.log(data);
+    res.send(data);
+  });
 });
 
 app.post("/airtime/buy", async (req, res) => {

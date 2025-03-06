@@ -75,10 +75,36 @@ const deduct = async (email, amount) => {
   }
 };
 
+const setTransaction = async (transaction) => {
+  try {
+    const { data, error } = await supabase
+      .from("transactions")
+      .insert([
+        {
+          email: transaction.email,
+          amount: transaction.amount,
+          purpose: transaction.purpose,
+          status: transaction.status,
+          transaction_id: transaction.transactionId,
+          phone: transaction.phone,
+          network: transaction.network,
+          plan_size: transaction.planSize,
+          previous_balance: transaction.previousBalance,
+          new_balance: transaction.newBalance,
+        },
+      ])
+      .select();
+    return { data, error };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   fetchUser,
   updateDeposits,
   fetchDeposit,
   recharge,
   deduct,
+  setTransaction,
 };

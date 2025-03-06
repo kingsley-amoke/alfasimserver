@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { fetchUser, deduct } = require("./helpers");
+const { fetchUser, deduct, setTransaction } = require("./helpers");
 require("dotenv").config();
 
 const baseUrl = process.env.BASE_URL;
@@ -10,8 +10,6 @@ const getASBHeaders = () => ({
 });
 
 const buyData = async (data) => {
-  let response = {};
-
   const email = data.email;
   const price = data.price;
 
@@ -20,6 +18,20 @@ const buyData = async (data) => {
     return { data: null, error: "", message: "No user found", status: 404 };
 
   const { balance } = userData[0];
+
+  let response = {};
+  const transaction = {
+    email: email,
+    amount: price,
+    purpose: "data",
+    status: "",
+    transactionId: "",
+    phone: data.mobile_number,
+    network: "",
+    planSize: "",
+    previousBalance: balance,
+    newBalance: "",
+  };
 
   if (parseInt(balance) > price) {
     const body = {
@@ -43,6 +55,13 @@ const buyData = async (data) => {
           message: "Successful",
         };
         deduct(email, price);
+
+        transaction.status = response.data.Status;
+        transaction.transactionId = response.data.ident;
+        transaction.network = response.data.plan_network;
+        transaction.planSize = response.data.plan_name;
+        transaction.newBalance = (parseInt(balance) - price).toString();
+        setTransaction(transaction);
       })
       .catch((e) => {
         response = {
@@ -51,9 +70,10 @@ const buyData = async (data) => {
           error: "",
           message: "Server error",
         };
-      })
-      .finally(() => {
-        return response;
+
+        transaction.status = "failed";
+        transaction.newBalance = balance;
+        setTransaction(transaction);
       });
   } else {
     response = {
@@ -77,11 +97,8 @@ const buyAirtime = async (data) => {
 
   if (!userData)
     return { data: null, error: "", message: "No user found", status: 404 };
-  console.log(userData);
 
-  // const { balance } = userData[0];
-
-  const balance = "10";
+  const { balance } = userData[0];
 
   if (parseInt(balance) > price) {
     const body = {
@@ -114,9 +131,6 @@ const buyAirtime = async (data) => {
           error: e.response.data,
           message: "Server error",
         };
-      })
-      .finally(() => {
-        return response;
       });
   } else {
     response = {
