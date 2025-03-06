@@ -48,7 +48,7 @@ const buyData = async (data) => {
         response = {
           status: 400,
           data: null,
-          error: e.response.data,
+          error: "",
           message: "Server error",
         };
       })
