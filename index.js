@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const { creditUser } = require("./monnify");
-const { buyData, buyAirtime } = require("./asb");
+const ASBRouter = require("./routes/asb");
+const DatabaseRouter = require("./routes/database");
+const MonnifyRouter = require("./routes/monnify");
 
 const app = express();
 
@@ -17,25 +18,11 @@ app.use(cors());
 app.use(jsonParser);
 app.use(urlencodedParser);
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+app.use(ASBRouter);
 
-app.post("/transfer", (req, res) => {
-  creditUser(req.body).then(() => res.send(200));
-});
+app.use(DatabaseRouter);
 
-app.post("/data/buy", async (req, res) => {
-  buyData(req.body).then((data) => {
-    console.log(data);
-    res.send(data);
-  });
-});
-
-app.post("/airtime/buy", async (req, res) => {
-  buyAirtime(req.body).then((data) => res.send(data));
-});
-
+app.use(MonnifyRouter);
 app.listen(PORT, () => {
   console.log(`App listening on port : ${PORT}`);
 });
