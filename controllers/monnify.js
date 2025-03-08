@@ -7,7 +7,7 @@ const monnifyUrl = process.env.MONNIFY_BASEURL;
 
 const monnifyApiKey = process.env.MONNIFY_APIKEY;
 
-const monnifyEncodedKey = btoa(monnifyApiKey + ":" + monnifySecretKey);
+const monnifyEncodedKey = base64(monnifyApiKey + ":" + monnifySecretKey);
 
 const bvn = process.env.BVN;
 
@@ -21,7 +21,13 @@ async function getToken() {
     },
   };
 
-  const response = await axios.post(`${monnifyUrl}/api/v1/auth/login`, options);
+  const body = {};
+
+  const response = await axios.post(
+    `${monnifyUrl}/api/v1/auth/login`,
+    body,
+    options
+  );
 
   const token = response.data.responseBody?.accessToken;
 
