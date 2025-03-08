@@ -21,7 +21,7 @@ async function getToken() {
     },
   };
 
-  const response = await axios.get(`${monnifyUrl}/api/v1/auth/login`, options);
+  const response = await axios.post(`${monnifyUrl}/api/v1/auth/login`, options);
 
   const token = response.data.responseBody?.accessToken;
 
