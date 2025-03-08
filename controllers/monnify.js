@@ -7,7 +7,7 @@ const monnifyUrl = process.env.MONNIFY_BASEURL;
 
 const monnifyApiKey = process.env.MONNIFY_APIKEY;
 
-const monnifyEncodedKey = base64(monnifyApiKey + ":" + monnifySecretKey);
+const monnifyEncodedKey = btoa(monnifyApiKey + ":" + monnifySecretKey);
 
 const bvn = process.env.BVN;
 
