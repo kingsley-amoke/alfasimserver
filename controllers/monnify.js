@@ -21,10 +21,9 @@ async function getToken() {
     },
   };
 
-  const response = await fetch(`${monnifyUrl}/api/v1/auth/login`, options);
+  const response = await axios.get(`${monnifyUrl}/api/v1/auth/login`, options);
 
-  const data = await response.json();
-  const token = data.responseBody?.accessToken;
+  const token = response.data.responseBody?.accessToken;
 
   return token;
 }
