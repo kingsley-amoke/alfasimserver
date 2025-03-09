@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Database } = require("./supabase");
+const Database = require("./supabase");
 require("dotenv").config();
 
 const baseUrl = process.env.BASE_URL;

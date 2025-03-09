@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const { Database } = require("./supabase");
+const Database = require("./supabase");
 
 const monnifySecretKey = process.env.MONNIFY_SECRETKEY;
 const monnifyUrl = process.env.MONNIFY_BASEURL;
@@ -40,7 +40,8 @@ const MonnifyController = {
     const amount = data.eventData.amountPaid;
     const email = data.eventData.customer.email;
     const res = await Database.fetchDeposit(ref);
-    if (res.data.length > 0) {
+
+    if (res.error) {
       console.log(res);
       return;
     } else {

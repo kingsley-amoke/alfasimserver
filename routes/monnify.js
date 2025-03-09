@@ -4,7 +4,7 @@ const MonnifyController = require("../controllers/monnify");
 const MonnifyRouter = express.Router();
 
 MonnifyRouter.post("/transfer", (req, res) => {
-  MonnifyController.creditUser(req.body).then(() => res.send(200));
+  MonnifyController.creditUser(req.body).then(() => res.sendStatus(200));
 });
 
 MonnifyRouter.post("/account/create", (req, res) => {

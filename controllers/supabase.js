@@ -10,7 +10,7 @@ const Database = {
 
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -22,7 +22,7 @@ const Database = {
         .select();
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -32,7 +32,7 @@ const Database = {
 
       return data;
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -52,7 +52,7 @@ const Database = {
 
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -72,7 +72,7 @@ const Database = {
 
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
   setTransaction: async (transaction) => {
@@ -96,7 +96,7 @@ const Database = {
         .select();
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -114,7 +114,7 @@ const Database = {
 
       return { data, error };
     } catch (error) {
-      console.log(error);
+      return { data: null, error: error };
     }
   },
 
@@ -127,6 +127,7 @@ const Database = {
     } catch (error) {
       console.log(error);
     }
+    console.log({ data: data, error: error });
   },
 };
 
