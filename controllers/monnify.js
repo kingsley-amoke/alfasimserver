@@ -121,6 +121,8 @@ const MonnifyController = {
       };
     }
 
+    console.log(response);
+
     return response;
   },
 };
