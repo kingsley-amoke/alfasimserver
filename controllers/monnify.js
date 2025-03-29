@@ -92,7 +92,7 @@ const MonnifyController = {
         options
       );
       if (result.data.requestSuccessful) {
-        const data = res.data;
+        const data = result.data;
         console.log("data" + data);
         const userAccount = {
           account_name: data.accountName,
